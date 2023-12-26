@@ -1,8 +1,8 @@
 import { Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AllowAnonymous } from 'src/core/decorators/allow-anonymous-guard.decorator';
-import { ApiController } from 'src/core/decorators/api-controller.decorator';
-import { CurrentUser } from 'src/core/decorators/current-user.decorator';
+import { AllowAnonymous } from '@/core/decorators/allow-anonymous-guard.decorator';
+import { ApiController } from '@/core/decorators/api-controller.decorator';
+import { CurrentUser } from '@/core/decorators/current-user.decorator';
 
 @ApiController('auth')
 export class AuthenticationController {

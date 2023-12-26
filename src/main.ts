@@ -2,7 +2,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common';
-import { AuthorizationGuard } from './core/decorators/authorization-guard.decorator';
+import { AuthenticationGuard } from './core/decorators/authentication-guard.decorator';
 import { JwtService } from '@nestjs/jwt';
 
 async function bootstrap() {
@@ -23,7 +23,7 @@ async function bootstrap() {
 function configureAuthentication(app: INestApplication) {
   const reflector = app.get(Reflector);
   const jwtService = app.get(JwtService);
-  app.useGlobalGuards(new AuthorizationGuard(reflector, jwtService));
+  app.useGlobalGuards(new AuthenticationGuard(reflector, jwtService));
 }
 
 function configureSwagger(app: INestApplication) {
