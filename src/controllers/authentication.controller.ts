@@ -1,22 +1,22 @@
 import { Post } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { AllowAnonymous } from '@/core/decorators/allow-anonymous-guard.decorator';
 import { ApiController } from '@/core/decorators/api-controller.decorator';
 import { CurrentUser } from '@/core/decorators/current-user.decorator';
+import { User } from '@prisma/client';
+import { AuthenticationService } from '@/services/authentication/authentication.service';
 
 @ApiController('auth')
 export class AuthenticationController {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(private readonly authenticationService: AuthenticationService) {}
 
   @AllowAnonymous()
   @Post('sign-in/basic')
   async signinBasicAsync() {
-    const payload = { sub: 1, username: 'admin' };
-    return await this.jwtService.signAsync(payload);
+    return await this.authenticationService.sigInBasicAsync();
   }
 
   @Post('logout')
-  async logoutAsync(@CurrentUser() user) {
+  async logoutAsync(@CurrentUser() user: User) {
     return user;
   }
 }
