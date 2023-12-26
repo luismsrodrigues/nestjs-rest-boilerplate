@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { MetaModule } from './controllers/_meta/_meta.module';
+import ControllerModules from './controllers';
 
 @Module({
-  imports: [
-    MetaModule],
+  imports: [...ControllerModules],
   controllers: [],
   providers: [],
 })

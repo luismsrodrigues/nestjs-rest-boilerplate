@@ -1,6 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+import { Get } from '@nestjs/common';
+import { AllowAnonymous } from 'src/core/decorators/allow-anonymous-guard.decorator';
+import { ApiController } from 'src/core/decorators/api-controller.decorator';
 
-@Controller('_meta')
+@ApiController('meta')
+@AllowAnonymous()
 export class MetaController {
   constructor() {}
 
