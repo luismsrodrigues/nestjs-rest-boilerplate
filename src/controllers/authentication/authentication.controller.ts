@@ -6,9 +6,7 @@ import { CurrentUser } from 'src/core/decorators/current-user.decorator';
 
 @ApiController('auth')
 export class AuthenticationController {
-  constructor(
-    private readonly jwtService: JwtService
-  ) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   @AllowAnonymous()
   @Post('sign-in/basic')

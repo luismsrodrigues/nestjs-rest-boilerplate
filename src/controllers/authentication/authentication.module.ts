@@ -7,9 +7,9 @@ import { JwtModule } from '@nestjs/jwt';
   imports: [
     JwtModule.register({
       global: true,
-      secret: "123",
+      secret: '123',
       signOptions: { expiresIn: '60s' },
     }),
-  ]
+  ],
 })
 export class AuthenticationModule {}

@@ -1,7 +1,4 @@
-import {MetaModule} from './_meta/_meta.module';
-import {AuthenticationModule} from './authentication/authentication.module';
+import { MetaModule } from './_meta/_meta.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
-export default [
-    MetaModule,
-    AuthenticationModule
-];
+export default [MetaModule, AuthenticationModule];

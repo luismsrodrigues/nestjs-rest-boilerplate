@@ -20,7 +20,7 @@ async function bootstrap() {
 //   await prismaService.enableShutdownHooks(app);
 // }
 
-function configureAuthentication(app: INestApplication){
+function configureAuthentication(app: INestApplication) {
   const reflector = app.get(Reflector);
   const jwtService = app.get(JwtService);
   app.useGlobalGuards(new AuthorizationGuard(reflector, jwtService));
