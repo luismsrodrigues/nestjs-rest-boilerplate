@@ -41,7 +41,7 @@ function configureAuthentication(app: INestApplication) {
 
 function configureSwagger(app: INestApplication) {
   const options = new DocumentBuilder()
-    .setTitle('Unflow Template APi Rest')
+    .setTitle('API Rest')
     .setDescription('This is a template for a rest API')
     .setVersion('1.0')
     .addBearerAuth()
