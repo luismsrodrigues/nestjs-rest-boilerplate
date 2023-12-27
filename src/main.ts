@@ -13,7 +13,13 @@ import { ValidationBadRequestExceptionDto } from './dtos/validation-bad-request-
 import { GlobalExceptionFilter } from './core/decorators/global-exception-filter.decorator';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger:
+      process.env.NODE_ENV === 'development'
+        ? ['log', 'debug', 'error', 'verbose', 'warn']
+        : ['error', 'warn'],
+  });
+
   const config = app.get(ConfigService);
 
   configureSwagger(app);
