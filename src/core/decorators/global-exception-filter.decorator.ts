@@ -3,6 +3,7 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  Logger,
   ValidationError,
 } from '@nestjs/common';
 import { Response } from 'express';
@@ -11,6 +12,8 @@ import { ValidationBadRequestExceptionDto } from '@/dtos/validation-bad-request-
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
+  private logger = new Logger('GlobalExceptionFilter');
+
   public catch(
     exception:
       | Error
@@ -39,13 +42,13 @@ export class GlobalExceptionFilter implements ExceptionFilter {
           }),
         );
       } catch (e) {
-        console.error(e);
+        this.logger.warn(e);
         messages = {
           general: 'An unexpected error has occured',
         };
       }
 
-      console.error({
+      this.logger.warn({
         type: exception.name,
         status,
         messages: JSON.stringify(messages),
@@ -59,7 +62,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       const status = exception.getStatus();
       const message = exception.getResponse();
 
-      console.error({
+      this.logger.error({
         type: exception.name,
         status,
         message,
@@ -69,7 +72,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
       return response.status(status).json(message);
     } else if (exception instanceof Prisma.PrismaClientKnownRequestError) {
-      console.error({
+      this.logger.warn({
         type: exception.name,
         prisma_version: exception.clientVersion,
         error: exception.code,
@@ -103,7 +106,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
       return response.status(statusCode).json({ message });
     } else {
-      console.error({
+      this.logger.warn({
         type: exception.name,
         message: JSON.stringify(exception.message),
         path: request.url,
